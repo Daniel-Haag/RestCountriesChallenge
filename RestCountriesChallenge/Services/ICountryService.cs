@@ -6,6 +6,5 @@ namespace RestCountriesChallenge.Services
     {
         List<Country> GetCountryData(string name);
         MemoryCacheEntryOptions SetCacheOptions(int expirationSeconds);
-        string teste(bool go);
     }
 }
