@@ -11,11 +11,13 @@ namespace RestCountriesChallenge.Controllers
     public class CountriesController : ControllerBase
     {
         private readonly IMemoryCache _cache;
+        private readonly ICountriesService _countryService;
 
         //Injeções de dependência
-        public CountriesController(IMemoryCache cache)
+        public CountriesController(IMemoryCache cache, ICountriesService countryService)
         {
             _cache = cache;
+            _countryService = countryService;
         }
 
         /// <summary>
@@ -29,12 +31,11 @@ namespace RestCountriesChallenge.Controllers
             var cacheKey = "Country";
             List<Country> result = new List<Country>();
             MemoryCacheEntryOptions? cacheOptions;
-            CountriesService countriesService = new CountriesService();
 
             if (!_cache.TryGetValue<List<Country>>(cacheKey, out result))
             {
-                result = countriesService.GetCountryData(name);
-                cacheOptions = countriesService.SetCacheOptions(30);
+                result = _countryService.GetCountryData(name);
+                cacheOptions = _countryService.SetCacheOptions(30);
 
                 _cache.Set(cacheKey, result, cacheOptions);
 
@@ -51,8 +52,8 @@ namespace RestCountriesChallenge.Controllers
 
                     if (maybeOldName.ToLower() != name.ToLower())
                     {
-                        result = countriesService.GetCountryData(name);
-                        cacheOptions = countriesService.SetCacheOptions(30);
+                        result = _countryService.GetCountryData(name);
+                        cacheOptions = _countryService.SetCacheOptions(30);
                         _cache.Set(cacheKey, result, cacheOptions);
                     }
                 }

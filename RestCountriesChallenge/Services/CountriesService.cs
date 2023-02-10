@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace RestCountriesChallenge.Services
 {
-    public class CountriesService
+    public class CountriesService : ICountriesService
     {
         public List<Country> GetCountryData(string name)
         {
