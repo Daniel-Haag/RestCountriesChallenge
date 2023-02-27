@@ -3,6 +3,7 @@ using Microsoft.Extensions.Caching.Memory;
 using RestSharp;
 using System.Text.Json;
 using RestCountriesChallenge.Services;
+using RestCountriesChallenge.Models;
 
 namespace RestCountriesChallenge.Controllers
 {
@@ -33,8 +34,13 @@ namespace RestCountriesChallenge.Controllers
 
             if (!_cache.TryGetValue<List<Country>>(cacheKey, out result))
             {
+                //Consumo da API para obter os dados 
                 result = countriesService.GetCountryData(name);
+
+                //Configurando as opções de cache
                 cacheOptions = countriesService.SetCacheOptions(30);
+
+                //Atribuindo o resultado no cache
                 _cache.Set(cacheKey, result, cacheOptions);
 
                 if (result != null)
@@ -50,8 +56,13 @@ namespace RestCountriesChallenge.Controllers
 
                     if (maybeOldName.ToLower() != name.ToLower())
                     {
+                        //Consumo da API para obter os dados
                         result = countriesService.GetCountryData(name);
+
+                        //Configurando as opções de cache
                         cacheOptions = countriesService.SetCacheOptions(30);
+
+                        //Atribuindo o resultado no cache
                         _cache.Set(cacheKey, result, cacheOptions);
                     }
                 }
