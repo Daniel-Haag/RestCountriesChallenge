@@ -35,7 +35,6 @@ namespace RestCountriesChallenge.Controllers
             {
                 result = countriesService.GetCountryData(name);
                 cacheOptions = countriesService.SetCacheOptions(30);
-
                 _cache.Set(cacheKey, result, cacheOptions);
 
                 if (result != null)
