@@ -18,6 +18,24 @@
         public string symbol { get; set; }
     }
 
+    public class USD
+    {
+        public string name { get; set; }
+        public string symbol { get; set; }
+    }
+
+    public class PHP
+    {
+        public string name { get; set; }
+        public string symbol { get; set; }
+    }
+
+    public class EUR
+    {
+        public string name { get; set; }
+        public string symbol { get; set; }
+    }
+
     public class CapitalInfo
     {
         public List<double> latlng { get; set; }
@@ -44,6 +62,9 @@
     public class Currencies
     {
         public BRL BRL { get; set; }
+        public USD USD { get; set; }
+        public PHP PHP { get; set; }
+        public EUR EUR { get; set; }
     }
 
     public class Cym

@@ -10,10 +10,40 @@ namespace CountriesChallengeTest
         }
 
         [Test]
-        public void ApiIsWorking()
+        public void ApiIsWorkingByName()
         {
             CountriesService service = new CountriesService();
-            var result = service.GetCountryData("Brazil");
+            var result = service.GetCountryDataByName("Brazil");
+
+            if (result != null)
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail();
+            }
+        }
+
+        public void ApiIsWorkingByCurrency()
+        {
+            CountriesService service = new CountriesService();
+            var result = service.GetCountryDataByCurrency("BRL");
+
+            if (result != null)
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail();
+            }
+        }
+
+        public void ApiIsWorkingByCode()
+        {
+            CountriesService service = new CountriesService();
+            var result = service.GetCountryDataByCode("BR");
 
             if (result != null)
             {

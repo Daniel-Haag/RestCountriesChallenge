@@ -19,28 +19,35 @@ namespace RestCountriesChallenge.Controllers
         }
 
         /// <summary>
-        /// Método utilizado para retornar os dados de um país conforme o nome informado
+        /// Método utilizado para retornar os dados de um país conforme o nome, moeda ou sigla informados
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpGet("GetCountry")]
-        public List<Country> GetCountry(string name)
+        public List<Country> GetCountry(string? name, string? currency, string? code)
         {
-            var cacheKey = "Country";
+            //Chave para obter os dados do cache
+            string cacheKey = string.Empty;
+
+            //Objeto principal que entrega os dados obtidos
             List<Country> result = new List<Country>();
-            MemoryCacheEntryOptions? cacheOptions;
+
+            //Serviço que tem a lógica para os dados dos países
             CountriesService countriesService = new CountriesService();
+
+            //Serviço que tem a lógica para as configurações de cache
+            CacheService cacheService = new CacheService();
+
+            //Configurando a chave de acesso aos dados do cache em tempo de execução
+            cacheKey = cacheService.SetCacheKey(name, currency, code, cacheKey);
 
             if (!_cache.TryGetValue<List<Country>>(cacheKey, out result))
             {
-                //Consumo da API para obter os dados 
-                result = countriesService.GetCountryData(name);
+                //Obtendo os dados necessários via api rest
+                result = countriesService.GetData(name, currency, code, result);
 
-                //Configurando as opções de cache
-                cacheOptions = countriesService.SetCacheOptions(30);
-
-                //Atribuindo o resultado no cache
-                _cache.Set(cacheKey, result, cacheOptions);
+                //Configurando e atribuindo o resultado no cache
+                _cache.Set(cacheKey, result, cacheService.SetCacheOptions(30));
 
                 if (result != null)
                 {
@@ -49,22 +56,7 @@ namespace RestCountriesChallenge.Controllers
             }
             else
             {
-                if (result != null && result.Count > 0)
-                {
-                    string maybeOldName = result[0].name.common.ToString().ToLower();
-
-                    if (maybeOldName.ToLower() != name.ToLower())
-                    {
-                        //Consumo da API para obter os dados
-                        result = countriesService.GetCountryData(name);
-
-                        //Configurando as opções de cache
-                        cacheOptions = countriesService.SetCacheOptions(30);
-
-                        //Atribuindo o resultado no cache
-                        _cache.Set(cacheKey, result, cacheOptions);
-                    }
-                }
+                return result;
             }
 
             return result;
