@@ -1,9 +1,44 @@
-﻿namespace RestCountriesChallenge.Models
+﻿namespace RestCountriesChallenge
 {
+    public class Ara
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class Bre
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
     public class BRL
     {
         public string name { get; set; }
         public string symbol { get; set; }
+    }
+
+    public class CapitalInfo
+    {
+        public List<double> latlng { get; set; }
+    }
+
+    public class Car
+    {
+        public List<string> signs { get; set; }
+        public string side { get; set; }
+    }
+
+    public class Ces
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class CoatOfArms
+    {
+        public string png { get; set; }
+        public string svg { get; set; }
     }
 
     public class Currencies
@@ -11,11 +46,85 @@
         public BRL BRL { get; set; }
     }
 
+    public class Cym
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class Demonyms
+    {
+        public Eng eng { get; set; }
+        public Fra fra { get; set; }
+    }
+
+    public class Deu
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class Eng
+    {
+        public string f { get; set; }
+        public string m { get; set; }
+    }
+
+    public class Est
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class Fin
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
     public class Flags
     {
         public string png { get; set; }
         public string svg { get; set; }
         public string alt { get; set; }
+    }
+
+    public class Fra
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+        public string f { get; set; }
+        public string m { get; set; }
+    }
+
+    public class Hrv
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class Hun
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class Ita
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class Jpn
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class Kor
+    {
+        public string official { get; set; }
+        public string common { get; set; }
     }
 
     public class Languages
@@ -41,10 +150,34 @@
         public Por por { get; set; }
     }
 
+    public class Nld
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class Per
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
+    public class Pol
+    {
+        public string official { get; set; }
+        public string common { get; set; }
+    }
+
     public class Por
     {
         public string official { get; set; }
         public string common { get; set; }
+    }
+
+    public class PostalCode
+    {
+        public string format { get; set; }
+        public string regex { get; set; }
     }
 
     public class Country

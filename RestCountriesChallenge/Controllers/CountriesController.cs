@@ -3,7 +3,6 @@ using Microsoft.Extensions.Caching.Memory;
 using RestSharp;
 using System.Text.Json;
 using RestCountriesChallenge.Services;
-using RestCountriesChallenge.Models;
 
 namespace RestCountriesChallenge.Controllers
 {
